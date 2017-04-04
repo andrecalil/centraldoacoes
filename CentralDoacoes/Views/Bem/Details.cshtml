@@ -1,0 +1,37 @@
+@model BemDetails
+<form asp-controller="Bem" asp-action="Create" method="post" class="form-horizontal">
+    <h4>Novo Bem</h4>
+    <hr />
+    <div class="form-group">
+        <label class="col-md-2 control-label">Nome</label>
+        <div class="col-md-10">
+            <input name="Name" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Descrição</label>
+        <div class="col-md-10">
+            <textarea name="Description" class="form-control"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Natureza</label>
+        <div class="col-md-10">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="Natureza" value="p" checked>Produto
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="Natureza" value="s">Serviço
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-default">Salvar  <i class="glyphicon glyphicon-check"></i></button>
+        </div>
+    </div>
+</form>
