@@ -1,34 +1,55 @@
 @model BeneficiarioDetails
+@{
+    ViewData["Breadcrumbs"] = "<li><a href='/'>In&iacute;cio</a></li><li><a href='/beneficiario/'>Benefici&aacute;rios</a></li><li class='active'>Novo</li>";
+}
 <form asp-controller="Beneficiario" asp-action="Create" method="post" class="form-horizontal">
-    <h4>Novo Beneficiário</h4>
+    <h4>Novo Benefici&aacute;rio</h4>
     <hr />
+    @await Html.PartialAsync("_Entity")
     <div class="form-group">
-        <label class="col-md-2 control-label">Nome</label>
+        <label class="col-md-2 control-label">Atividade Principal</label>
         <div class="col-md-10">
-            <input name="Name" class="form-control" />
+            <select class="form-control" name="Atividade">
+                <option></option>
+                <option value="Menores">Lar de Menores</option>
+                <option value="Idosos">Lar de Idosos</option>
+                <option value="Albergue">Albergue/Casa de Passagem</option>
+                <option value="Lar">Lar - Outros</option>
+                <option value="Creche">Creche</option>
+                <option value="Escola">Escola</option>
+                <option value="ApoioEscolar">Entidade de Apoio Escolar</option>
+                <option value="CentroEspirita">Centro Esp&iacute;rita</option>
+                <option value="Igreja">Igreja</option>
+                <option value="Recuperacao">Centro de Recupera&ccedil;&atilde;o</option>
+                <option value="Saude">Institui&ccedil;&atilde;o de Sa&uacute;de</option>
+                <option value="Outra">Outra</option>
+            </select>
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">Telefone</label>
-        <div class="col-md-10">
-            <input name="Telefone" class="form-control" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">E-mail</label>
-        <div class="col-md-10">
-            <input name="Email" class="form-control" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">Endereço</label>
-        <div class="col-md-10">
-            <textarea name="address" class="form-control"></textarea>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <button type="submit" class="btn btn-default">Salvar  <i class="glyphicon glyphicon-check"></i></button>
-        </div>
-    </div>
+    @await Html.PartialAsync("_SaveCancel", "/beneficiario")
 </form>
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            function toggleEntity(pf) {
+                $('.section-pf').hide();
+                $('.section-pj').hide();
+
+                if (pf)
+                    $('.section-pf').show();
+                else
+                    $('.section-pj').show();
+            }
+
+            toggleEntity(true);
+
+            $('input[name=Pessoa]').change(function () {
+                toggleEntity(this.value == 'f');
+            });
+
+
+
+        });
+    </script>
+}

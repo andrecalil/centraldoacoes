@@ -1,28 +1,59 @@
 @model DoadorDetails
+@{
+    ViewData["Breadcrumbs"] = "<li><a href='/'>In&iacute;cio</a></li><li><a href='/doador/'>Doadores</a></li><li class='active'>Novo</li>";
+}
 <form asp-controller="Doador" asp-action="Create" method="post" class="form-horizontal">
     <h4>Novo Doador</h4>
     <hr />
+    @await Html.PartialAsync("_Entity")
     <div class="form-group">
-        <label class="col-md-2 control-label">Nome</label>
+        <label class="col-md-2 control-label">Atividade</label>
         <div class="col-md-10">
-            <input name="Name" class="form-control" />
+            <select class="form-control" name="Atividade">
+                <option></option>
+                <option val="Comercio">Com&eacute;rcio</option>
+                <option val="Rural">Produtor Rural</option>
+                <option val="Feirante">Feirante</option>
+                <option val="Industria">Ind&uacute;stria</option>
+                <option val="Servicos">Servi&ccedil;os</option>
+                <option val="GDF">GDF</option>
+                <option val="Federal">Governo Federal</option>
+                <option val="Outro">Outro</option>
+            </select>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">Telefone</label>
+        <label class="col-md-2 control-label">Setor</label>
         <div class="col-md-10">
-            <input name="Telefone" class="form-control" />
+            <select class="form-control" name="Setor">
+                <option></option>
+            </select>
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">E-mail</label>
-        <div class="col-md-10">
-            <input name="Email" class="form-control" />
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <button type="submit" class="btn btn-default">Salvar  <i class="glyphicon glyphicon-check"></i></button>
-        </div>
-    </div>
+    @await Html.PartialAsync("_SaveCancel", "/doador")
 </form>
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            function toggleEntity(pf) {
+                $('.section-pf').hide();
+                $('.section-pj').hide();
+
+                if (pf)
+                    $('.section-pf').show();
+                else
+                    $('.section-pj').show();
+            }
+
+            toggleEntity(true);
+
+            $('input[name=Pessoa]').change(function () {
+                toggleEntity(this.value == 'f');
+            });
+
+
+
+        });
+    </script>
+}

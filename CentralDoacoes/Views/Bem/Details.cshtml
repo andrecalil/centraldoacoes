@@ -1,4 +1,7 @@
 @model BemDetails
+@{
+    ViewData["Breadcrumbs"] = "<li><a href='/'>In&iacute;cio</a></li><li><a href='/bem/'>Bens</a></li><li class='active'>Novo</li>";
+}
 <form asp-controller="Bem" asp-action="Create" method="post" class="form-horizontal">
     <h4>Novo Bem</h4>
     <hr />
@@ -9,29 +12,49 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">Descrição</label>
-        <div class="col-md-10">
-            <textarea name="Description" class="form-control"></textarea>
-        </div>
-    </div>
-    <div class="form-group">
         <label class="col-md-2 control-label">Natureza</label>
         <div class="col-md-10">
             <div class="radio">
-                <label>
-                    <input type="radio" name="Natureza" value="p" checked>Produto
-                </label>
+                <label><input type="radio" name="Natureza" value="p" checked>Produto</label>
             </div>
             <div class="radio">
-                <label>
-                    <input type="radio" name="Natureza" value="s">Serviço
-                </label>
+                <label><input type="radio" name="Natureza" value="s">Servi&ccedil;o</label>
             </div>
         </div>
     </div>
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <button type="submit" class="btn btn-default">Salvar  <i class="glyphicon glyphicon-check"></i></button>
+        <label class="col-md-2 control-label">Unidade de medida</label>
+        <div class="col-md-10">
+            <select class="form-control" name="UnidadeMedida">
+                <option></option>
+                <option val="Kg">Quilograma</option>
+                <option val="L">Litro</option>
+                <option val="Um">Unidade</option>
+                <option val="Dz">D&uacute;zia</option>
+                <option val="Cx">Caixa</option>
+                <option val="Pct">Pacote</option>
+                <option val="Pc">Pe&ccedil;a</option>
+                <option val="Mc">Ma&ccedil;o</option>
+                <option val="Kt">Kit</option>
+                <option val="Edu">A&ccedil;&atilde;o educativa</option>
+                <option val="AT">Assessoria t&eacute;cnica</option>
+                <option val="Out">Outro</option>
+            </select>
         </div>
     </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Armazenamento</label>
+        <div class="col-md-10">
+            <div class="radio">
+                <label><input type="radio" name="Armazenamento" value="a" checked>Temperatura ambiente</label>
+            </div>
+            <div class="radio">
+                <label><input type="radio" name="Armazenamento" value="r">Refrigerado</label>
+            </div>
+            <div class="radio">
+                <label><input type="radio" name="Armazenamento" value="c">Congelado</label>
+            </div>
+        </div>
+    </div>
+    @await Html.PartialAsync("_SaveCancel", "/bem")
 </form>
